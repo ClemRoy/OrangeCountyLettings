@@ -10,7 +10,7 @@ jobs:
           name: Install python deps in venv
           command: |
             python -m venv env
-            env\Scripts\activate.bat
+            env/scripts/activate.bat
             pip install -r requirements.txt
       - run:
           name: Set Secret Key
