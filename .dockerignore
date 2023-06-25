@@ -1,8 +1,21 @@
+#Git
+.git
+.gitignore
+
+# Docker
+.docker
+
+#cache
+.pytest_cache/
 **/__pycache__
 *.pyc
-venv
-env
-.env
+
+# virtual env
+.venv/
+venv/
+.env/
+env/
+
+#devtools
 passwords.txt
 bfg.jar
-README.md

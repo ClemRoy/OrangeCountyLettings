@@ -1,0 +1,28 @@
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: cimg/python:3.10.2
+    steps:
+      - checkout
+      - run: pip install -r requirement.txt
+      - run: python manage.py collectstatic --noinput
+
+  test:
+    docker:
+      - image: cimg/python:3.10.2
+    steps:
+      - checkout
+      - run: pip install -r requirement.txt 
+      - run: python pytest
+
+workflows:
+  version: 2
+  jobs:
+    - build_and_test:
+      jobs:
+      - build
+      - test:
+        requires:
+          - build
