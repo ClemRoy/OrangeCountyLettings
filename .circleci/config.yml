@@ -19,13 +19,18 @@ jobs:
           name: Collect statics for interface
           command: |
             python manage.py collectstatic --noinput
+      - persist_to_workspace:
+        root: ~/app
+        paths:
+          - .
 
   test:
     docker:
       - image: cimg/python:3.10.2
     steps:
       - checkout
-      - run: pip install -r requirements.txt 
+      - attach_workspace:
+        at: ~/app
       - run: python -m pytest
 
 workflows:
