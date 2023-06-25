@@ -20,9 +20,9 @@ jobs:
           command: |
             python manage.py collectstatic --noinput
       - persist_to_workspace:
-        root: ~/app
-        paths:
-          - .
+          root: ~/app
+          paths:
+            - .
 
   test:
     docker:
