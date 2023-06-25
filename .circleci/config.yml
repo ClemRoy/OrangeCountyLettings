@@ -22,7 +22,7 @@ workflows:
   jobs:
     - build_and_test:
       jobs:
-      - build
-      - test:
-        requires:
-          - build
+        - build
+        - test:
+          requires:
+            - build
