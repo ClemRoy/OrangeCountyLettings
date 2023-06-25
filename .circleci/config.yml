@@ -1,21 +1,22 @@
 version: 2.1
+orbs:
+  python: circleci/python@2.1.1
 
-jobs:
-  build:
-    docker:
-      - image: cimg/python:3.10.2
-    steps:
-      - checkout
-      - run:
-          name: Install python deps in venv
-          command: |
-            pip install -r requirements.txt
-      - run:
-          name: Set Secret Key
-          command: |
-            set SECRET_KEY=%SECRET_KEY%
-            echo SECRET_KEY=%SECRET_KEY% >> %BASH_ENV%
-      - run: python manage.py collectstatic --noinput
+  jobs:
+    build:
+      executor: python/default
+      steps:
+        - checkout
+        - python/install-packages:
+            requirements-file: requirements.txt
+        - run:
+            name: Set Secret Key
+            command: |
+              echo "SECRET_KEY=${SECRET_KEY}" >> $BASH_ENV
+        - run:
+            name: Collect statics for interface
+            command: |
+              python manage.py collectstatic --noinput
 
   test:
     docker:
