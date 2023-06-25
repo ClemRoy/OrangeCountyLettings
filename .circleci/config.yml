@@ -20,7 +20,7 @@ jobs:
     steps:
       - checkout
       - run: pip install -r requirements.txt 
-      - run: python pytest
+      - run: python -m pytest
 
 workflows:
   version: 2
