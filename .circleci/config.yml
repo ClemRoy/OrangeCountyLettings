@@ -2,21 +2,21 @@ version: 2.1
 orbs:
   python: circleci/python@2.1.1
 
-  jobs:
-    build:
-      executor: python/default
-      steps:
-        - checkout
-        - python/install-packages:
-            requirements-file: requirements.txt
-        - run:
-            name: Set Secret Key
-            command: |
-              echo "SECRET_KEY=${SECRET_KEY}" >> $BASH_ENV
-        - run:
-            name: Collect statics for interface
-            command: |
-              python manage.py collectstatic --noinput
+jobs:
+  build:
+    executor: python/default
+    steps:
+      - checkout
+      - python/install-packages:
+          requirements-file: requirements.txt
+      - run:
+          name: Set Secret Key
+          command: |
+            echo "SECRET_KEY=${SECRET_KEY}" >> $BASH_ENV
+      - run:
+          name: Collect statics for interface
+          command: |
+            python manage.py collectstatic --noinput
 
   test:
     docker:
