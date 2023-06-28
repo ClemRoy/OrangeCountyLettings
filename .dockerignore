@@ -6,8 +6,12 @@
 .docker
 
 #cache
+./__pycache__/
+./*/__pycache__/
+./*/*/__pycache__/
+./*/*/*/__pycache__/
+**/__pycache__/
 .pytest_cache/
-**/__pycache__
 *.pyc
 
 # virtual env
@@ -15,6 +19,9 @@
 venv/
 .env/
 env/
+
+#env variable
+.env
 
 #devtools
 passwords.txt
