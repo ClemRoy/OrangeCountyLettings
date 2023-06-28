@@ -21,7 +21,7 @@ jobs:
           command: |
             python manage.py collectstatic --noinput
       - persist_to_workspace:
-          root: "~"
+          root: ~
           paths:
             - .
 
@@ -31,12 +31,12 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-          at: "~"
+          at: ~
       - run:
         name: Tests
         command: python -m pytest
       - run:
-        name: linter
+        name: Linter
         command: python flake8
 
 
