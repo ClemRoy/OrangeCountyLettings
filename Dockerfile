@@ -21,7 +21,7 @@ RUN python -m venv /env && \
     pip install --upgrade pip && \
     pip install -r /requirements.txt && \
     adduser --disabled-password --no-create-home app && \
-    python manage.py collectstatic
+    python manage.py collectstatic --noinput
 
 ENV PATH="/env/bin:$PATH"
 
