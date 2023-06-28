@@ -21,30 +21,25 @@ jobs:
           command: |
             python manage.py collectstatic --noinput
       - persist_to_workspace:
-          root: ~
+          root: "~"
           paths:
             - .
 
-  test_and_linter:
+  test:
     docker:
       - image: cimg/python:3.10.2
     steps:
       - checkout
       - attach_workspace:
-          at: ~
-      - run:
-        name: Tests
-        command: python -m pytest
-      - run:
-        name: Linter
-        command: python flake8
-
+          at: "~"
+      - run: python -m pytest
+      - run: python flake8
 
 workflows:
   version: 2
   build_and_test:
     jobs:
       - build
-      - test_and_linter:
+      - test:
           requires:
             - build
