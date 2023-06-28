@@ -2,6 +2,12 @@ version: 2.1
 orbs:
   python: circleci/python@2.1.1
   docker: circleci/docker@2.2.0
+
+filters:
+  branches:
+    only:
+      - masterssssssssssssssssssssssssssssssssssssssss
+
 jobs:
   build:
     docker:
@@ -24,6 +30,7 @@ jobs:
           root: "~"
           paths:
             - .
+    filters: *filters
 
   test:
     docker:
@@ -34,7 +41,7 @@ jobs:
           at: "~"
       - run: python -m pytest
       - run: flake8
-
+    filters: *filters
 
   build_and_push_image:
     executor: docker/docker
@@ -50,7 +57,7 @@ jobs:
             docker build -t clementroy/orangecountylettings:latest .
             echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
             docker push clementroy/orangecountylettings:latest
-
+    filters: *filters
 
 
 
