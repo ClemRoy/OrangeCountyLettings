@@ -47,9 +47,9 @@ jobs:
       - run:
           name: Build and push docker image
           command: |
-            docker build -t clementroy/OangeCountyLettings:latest .
+            docker build -t clementroy/orangecountylettings:latest .
             echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
-            docker push clementroy/OangeCountyLettings:latest
+            docker push clementroy/orangecountylettings:latest
 
 
 
