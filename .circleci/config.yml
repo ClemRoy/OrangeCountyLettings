@@ -37,7 +37,7 @@ jobs:
 
 
   build_and_push_image:
-    executor: docker/default
+    executor: docker/docker
     steps:
       - checkout
       - attach_workspace:
