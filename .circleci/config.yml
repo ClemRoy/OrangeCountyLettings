@@ -33,7 +33,7 @@ jobs:
       - attach_workspace:
           at: "~"
       - run: python -m pytest
-      - run: python flake8
+      - run: flake8
 
 workflows:
   version: 2
