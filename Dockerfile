@@ -3,7 +3,6 @@ FROM python:3.9-alpine3.13
 LABEL "website.name"="oc_lettings"
 # set work directory
 WORKDIR /app
-EXPOSE 8000
 
 # set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
@@ -25,4 +24,4 @@ RUN python -m venv /env && \
 
 ENV PATH="/env/bin:$PATH"
 
-CMD ["gunicorn","oc_lettings_site.wsgi:application","--bind","0.0.0.0:$PORT"]
+CMD gunicorn oc_lettings_site.wsgi:application --bind 0.0.0.0:$PORT
