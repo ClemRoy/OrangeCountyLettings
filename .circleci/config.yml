@@ -36,7 +36,7 @@ jobs:
       - run: python -m pytest
       - run: flake8
 
-  build_and_push_image:
+  build_and_push_docker:
     executor: docker/docker
     steps:
       - attach_workspace:
@@ -75,7 +75,7 @@ workflows:
       - test:
           requires:
             - build
-      - build_and_push_image:
+      - build_and_push_docker:
           requires:
             - build
             - test
@@ -87,7 +87,7 @@ workflows:
           requires:
             - build
             - test
-            - build_and_push_image
+            - build_and_push_docker
           filters:
             branches:
               only:
