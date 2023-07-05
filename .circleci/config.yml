@@ -51,7 +51,7 @@ jobs:
             docker push orangecountylettings:latest
 
   deploy_on_heroku:
-    executor: docker/docker
+    executor: heroku/default
     steps:
       - attach_workspace:
         at: "~"
