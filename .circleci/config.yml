@@ -50,12 +50,8 @@ jobs:
             echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
             docker push orangecountylettings:latest
 
-  deploy_on_heroku:
-    executor: heroku/default
-    steps:
-      - attach_workspace:
-          at: "~"
-      - heroku/install
+
+
 
 
 workflows:
