@@ -59,9 +59,17 @@ workflows:
   build_and_test:
     jobs:
       - build:
+        filters:
+            branches:
+              only:
+                - master
       - test:
           requires:
             - build
+          filters:
+            branches:
+              only:
+                - master
       - build_and_push_image:
           requires:
             - build
