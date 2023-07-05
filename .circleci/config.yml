@@ -58,13 +58,12 @@ jobs:
       - setup_remote_docker:
           version: 20.10.7
       - heroku/install
-      - heroku/deploy-via-git
-      #- run:
-          #name: Deploy to Heroku
-          #command: |
-            #docker pull clementroy/orangecountylettings:latest
-            #heroku container:login
-            #heroku container:release web -a orangecountylettings
+      - run:
+          name: Deploy to Heroku
+          command: |
+            heroku container:login
+            docker tag clementroy/orangecountylettings:latest registry.heroku.com/orangecountylettings
+            heroku container:release web -a orangecountylettings
 
 
 
