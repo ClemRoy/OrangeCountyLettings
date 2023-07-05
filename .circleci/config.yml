@@ -48,7 +48,7 @@ jobs:
           command: |
             docker build -t orangecountylettings:latest .
             echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
-            docker push orangecountylettings:latest
+            docker push clementroy/orangecountylettings:latest
 
   deploy_on_heroku:
     executor: heroku/default
