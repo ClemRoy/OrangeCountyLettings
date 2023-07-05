@@ -62,6 +62,8 @@ jobs:
           name: Set Heroku Key
           command: |
             heroku auth:token
+          environment:
+            HEROKU_API_KEY: $HEROKU_API_KEY
       - run:
           name: Deploy to Heroku
           command: |
