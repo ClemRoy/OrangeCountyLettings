@@ -51,7 +51,7 @@ jobs:
             docker push clementroy/orangecountylettings:latest
 
   deploy_on_heroku:
-    executor: heroku/default
+    executor: docker/docker
     steps:
       - attach_workspace:
           at: "~"
@@ -86,3 +86,7 @@ workflows:
             - build
             - test
             - build_and_push_image
+          filters:
+            branches:
+              only:
+                - master
