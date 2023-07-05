@@ -63,7 +63,7 @@ jobs:
           command: |
             docker pull clementroy/orangecountylettings:latest
             heroku container:login
-            heroku container:releasee web -a orangecountylettings
+            heroku container:release web -a orangecountylettings
 
 
 
