@@ -61,6 +61,7 @@ jobs:
       - run:
           name: Set Heroku Key
           command: |
+            echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
             heroku auth:token
           environment:
             HEROKU_API_KEY: $HEROKU_API_KEY
