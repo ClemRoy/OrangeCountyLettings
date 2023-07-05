@@ -62,7 +62,7 @@ jobs:
           name: Deploy to Heroku
           command: |
             heroku container:login
-            docker tag clementroy/orangecountylettings:latest registry.heroku.com/orangecountylettings
+            heroku container:push web
             heroku container:release web -a orangecountylettings
 
 
