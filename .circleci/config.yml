@@ -56,9 +56,12 @@ jobs:
       - attach_workspace:
         at: "~"
       - heroku/install
-      - heroku/deploy-via-docker:
-        image: orangecountylettings:latest
-        app-name: orangecountylettings
+      - run:
+        name: Deploy to Heroku
+        command: |
+          docker pull orangecountylettings:latest
+          heroku container:login
+          heroku container:release web -a orangecountylettings
 
 workflows:
   version: 2
