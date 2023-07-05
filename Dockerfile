@@ -2,16 +2,20 @@
 FROM python:3.9-alpine3.13
 LABEL "website.name"="oc_lettings"
 # set work directory
+ARG port
 WORKDIR /app
-EXPOSE $PORT
 
 # set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 ENV SECRET_KEY=SECRET_KEY
+ENV PORT=$port
 
 # copy project
 COPY . /app
+
+# expose port
+EXPOSE $PORT
 
 # install dependencies
 COPY ./requirements.txt /requirements.txt
