@@ -59,6 +59,10 @@ jobs:
           version: 20.10.7
       - heroku/install
       - run:
+          name: Set Heroku Key
+          command: |
+            heroku auth:token
+      - run:
           name: Deploy to Heroku
           command: |
             docker pull clementroy/orangecountylettings:latest
