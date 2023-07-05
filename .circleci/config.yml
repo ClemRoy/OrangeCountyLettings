@@ -57,11 +57,13 @@ jobs:
           at: "~"
       - heroku/install
       - run:
-        name: Deploy to Heroku
-        command: |
-          docker pull orangecountylettings:latest 
-          heroku container:login
-          heroku container:release web -a orangecountylettings
+          name: Build and push docker image
+          command: |
+            docker pull orangecountylettings:latest
+            heroku container:login
+            heroku container:releasee web -a orangecountylettings
+
+
 
 workflows:
   version: 2
