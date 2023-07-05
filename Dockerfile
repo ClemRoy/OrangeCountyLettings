@@ -3,6 +3,7 @@ FROM python:3.9-alpine3.13
 LABEL "website.name"="oc_lettings"
 # set work directory
 WORKDIR /app
+EXPOSE $PORT
 
 # set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
