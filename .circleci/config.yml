@@ -68,6 +68,7 @@ jobs:
             docker tag clementroy/orangecountylettings:latest registry.heroku.com/orangecountylettings/web
             docker push registry.heroku.com/orangecountylettings/web
             heroku container:release web -a orangecountylettings
+            heroku addons:create sentry:free
 
 
 
