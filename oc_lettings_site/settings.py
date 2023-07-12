@@ -124,7 +124,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
-dsn_key = os.getenv("CIRCLECI_SENTRY_DSN")
+dsn_key = os.getenv("SENTRY_DSN")
 
 
 sentry_sdk.init(
