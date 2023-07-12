@@ -85,7 +85,7 @@ jobs:
 
             # Authenticate with Sentry using your Sentry auth token or API key
             sentry-cli --version
-            sentry-cli auth login --org $SENTRY_LOGIN --token $SENTRY_TOKEN
+            sentry-cli login --auth-token $SENTRY_TOKEN
 
             # Create a new Sentry project
             sentry-cli projects create --organization $SENTRY_LOGIN --name orangecountylettings
