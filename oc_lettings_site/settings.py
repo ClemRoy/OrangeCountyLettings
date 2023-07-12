@@ -126,7 +126,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 dsn_key = os.environ.get("SENTRY_DSN")
 
-
+print("Initializing Sentry with DSN:", dsn_key)
 sentry_sdk.init(
     dsn=dsn_key,
     integrations=[
