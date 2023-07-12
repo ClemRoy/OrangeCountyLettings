@@ -11,6 +11,7 @@ load_dotenv()
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('SECRET_KEY')
+SENTRY_DSN = os.environ.get("SENTRY_DSN")
 
 IS_HEROKU_APP = "DYNO" in os.environ and "CI" not in os.environ
 
@@ -125,14 +126,11 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
-dsn_key = os.environ.get("SENTRY_DSN")
-test_var = os.environ.get("HEROKU_EMAIL")
-print("test:",test_var)
-print("Initializing Sentry with DSN:", SECRET_KEY)
-print("Initializing Sentry with DSN:", dsn_key)
+
+print("Initializing Sentry with DSN:", SENTRY_DSN)
+
 sentry_sdk.init(
-    dsn="https://08d18f7f3489419c8e19ff9b5ea2ab6b@" +
-    "o4505515978194944.ingest.sentry.io/4505516216025088",
+    dsn=SENTRY_DSN,
     integrations=[
         DjangoIntegration(),
     ],
