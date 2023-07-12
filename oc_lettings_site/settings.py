@@ -126,7 +126,8 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 dsn_key = os.environ.get("SENTRY_DSN")
-
+test_var = os.environ.get("HEROKU_EMAIL")
+print("test:",test_var)
 print("Initializing Sentry with DSN:", SECRET_KEY)
 print("Initializing Sentry with DSN:", dsn_key)
 sentry_sdk.init(
