@@ -61,6 +61,10 @@ jobs:
           version: 20.10.7
       - heroku/install
       - run:
+          name: Create Heroku app (if it doesn't exist)
+          command: |
+            heroku apps:info -a orangecountylettings || heroku apps:create orangecountylettings
+      - run:
           name: Deploy to Heroku
           command: |
             heroku container:login
