@@ -124,10 +124,11 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
+dsn_key = os.getenv("CIRCLECI_SENTRY_DSN")
+
 
 sentry_sdk.init(
-    dsn="""https://9e9b4a824a8348b681681779864429a6@
-    o4505515978194944.ingest.sentry.io/4505516085084160""",
+    dsn=dsn_key,
     integrations=[
         DjangoIntegration(),
     ],
