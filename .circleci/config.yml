@@ -72,7 +72,25 @@ jobs:
             docker tag clementroy/orangecountylettings:latest registry.heroku.com/orangecountylettings/web
             docker push registry.heroku.com/orangecountylettings/web
             heroku container:release web -a orangecountylettings
+      - run:
+          name: Configure Sentry for the app
+          command: |
+            # Set var for login
+            set SENTRY_LOGIN=%SENTRY_LOGIN%
+            echo SENTRY_LOGIN=%SENTRY_LOGIN% >> %BASH_ENV%
+            set SENTRY_TOKEN=%SENTRY_TOKEN%
+            echo SENTRY_TOKEN=%SENTRY_TOKEN% >> %BASH_ENV%
+            # Install Sentry CLI
+            curl -sL https://sentry.io/get-cli/ | bash
 
+            # Authenticate with Sentry using your Sentry auth token or API key
+            sentry-cli auth login --org $SENTRY_LOGIN --token $SENTRY_TOKEN
+
+            # Create a new Sentry project
+            sentry-cli projects create --organization $SENTRY_LOGIN --name orangecountylettings
+
+            # Configure the Heroku-Sentry integration
+            sentry-cli heroku connect --app orangecountylettings
 
 
 
