@@ -84,6 +84,7 @@ jobs:
             curl -sL https://sentry.io/get-cli/ | bash
 
             # Authenticate with Sentry using your Sentry auth token or API key
+            sentry-cli --version
             sentry-cli auth login --org $SENTRY_LOGIN --token $SENTRY_TOKEN
 
             # Create a new Sentry project
