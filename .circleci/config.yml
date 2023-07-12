@@ -64,7 +64,6 @@ jobs:
           name: Deploy to Heroku
           command: |
             heroku container:login
-            heroku addons:create sentry:free
             docker pull clementroy/orangecountylettings:latest
             docker tag clementroy/orangecountylettings:latest registry.heroku.com/orangecountylettings/web
             docker push registry.heroku.com/orangecountylettings/web
