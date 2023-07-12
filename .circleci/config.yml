@@ -63,7 +63,7 @@ jobs:
       - run:
           name: Create Heroku app (if it doesn't exist)
           command: |
-            heroku apps:info -a orangecountylettings || heroku apps:create orangecountylettings
+            heroku apps:info -a orangecountylettings || heroku apps:create orangecountylettings --region eu
       - run:
           name: Deploy to Heroku
           command: |
