@@ -149,7 +149,8 @@ else:
     if os.environ.get('SENTRY_DSN') == dsn:
         print("everything should be OK")
     else:
-        print("variable doesn't work")
+        if SENTRY_DSN == "":
+            print("string is empty")
 
 sentry_sdk.init(
     dsn="https://2a08e3d7d8a740cdabaa8adeee2ed5c3@o450" +
