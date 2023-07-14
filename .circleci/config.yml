@@ -26,24 +26,25 @@ jobs:
       - run: python -m pytest
       - run: flake8
 
-  build_and_push_docker:
-    executor: docker/docker
-    steps:
-      - attach_workspace:
-          at: "~"
-      - setup_remote_docker:
-          version: 20.10.7
-      - run:
-          name: get commit hah
-          command: |
-            HASH= git rev-parse HEAD
-      - run:
-          name: Build and push docker image
-          command: |
-            echo $DOCKERHUB_USERNAME
-            docker build -t clementroy/orangecountylettings:$HASH .
-            echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
-            docker push clementroy/orangecountylettings:$HASH
+build_and_push_docker:
+  executor: docker/docker
+  steps:
+    - attach_workspace:
+        at: "~"
+    - setup_remote_docker:
+        version: 20.10.7
+    - run:
+        name: Get commit hash
+        command: |
+          HASH=$(git rev-parse HEAD)
+          echo "Commit hash: $HASH"
+    - run:
+        name: Build and push docker image
+        command: |
+          echo $DOCKERHUB_USERNAME
+          docker build -t clementroy/orangecountylettings:$HASH .
+          echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+          docker push clementroy/orangecountylettings:$HASH
 
 
   deploy_on_heroku:
