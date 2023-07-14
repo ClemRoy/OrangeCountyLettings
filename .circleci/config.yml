@@ -13,9 +13,10 @@ jobs:
       - python/install-packages:
         requirements-file: requirements.txt
       - run:
-          name: Set Secret Key
+          name: Set Secret Key and sentry DSN
           command: |
             echo $SECRET_KEY
+            echo $SENTRY_DSN
       - run:
           name: Collect statics for interface
           command: |
@@ -44,7 +45,6 @@ jobs:
       - run:
           name: Build and push docker image
           command: |
-            echo $SENTRY_DSN
             echo $DOCKERHUB_USERNAME
             docker build --build-arg SECRET_KEY=$SECRET_KEY --build-arg SENTRY_DSN=$SENTRY_DSN -t clementroy/orangecountylettings:latest .
             echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
