@@ -16,6 +16,7 @@ jobs:
           name: Set Secret Key
           command: |
             echo $SECRET_KEY
+            echo $SENTRY_DSN
       - run:
           name: Collect statics for interface
           command: |

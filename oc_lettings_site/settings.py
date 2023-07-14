@@ -139,6 +139,7 @@ else:
 
 print(environment)
 print(DEBUG)
+print(SENTRY_DSN)
 
 sentry_sdk.init(
     dsn="https://2a08e3d7d8a740cdabaa8adeee2ed5c3@o450" + 
