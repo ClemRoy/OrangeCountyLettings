@@ -13,10 +13,9 @@ jobs:
       - python/install-packages:
         requirements-file: requirements.txt
       - run:
-          name: Set Secret Key and sentry DSN
+          name: Set Secret Key
           command: |
             echo $SECRET_KEY
-            echo $SENTRY_DSN
       - run:
           name: Collect statics for interface
           command: |
@@ -46,12 +45,17 @@ jobs:
           name: Build and push docker image
           command: |
             echo $DOCKERHUB_USERNAME
-            docker build --build-arg SECRET_KEY=$SECRET_KEY --build-arg SENTRY_DSN=$SENTRY_DSN -t clementroy/orangecountylettings:latest .
+            docker build -t clementroy/orangecountylettings:latest .
             echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
             docker push clementroy/orangecountylettings:latest
 
+
   deploy_on_heroku:
     executor: heroku/default
+    environment:
+      SENTRY_ORG: roy-jc
+      SENTRY_PROJECT: orangecountylettings
+      SENTRY_ENVIRONMENT: production
     steps:
       - attach_workspace:
           at: "~"
@@ -70,7 +74,16 @@ jobs:
             docker tag clementroy/orangecountylettings:latest registry.heroku.com/orangecountylettings/web
             docker push registry.heroku.com/orangecountylettings/web
             heroku container:release web -a orangecountylettings
-
+      - run:
+          name: Create release and notify Sentry of deploy
+          command: |
+            curl -sL https://sentry.io/get-cli/ | bash
+            export SENTRY_RELEASE=$(sentry-cli releases propose-version)
+            sentry-cli releases new -p $SENTRY_PROJECT $SENTRY_RELEASE
+            sentry-cli releases set-commits $SENTRY_RELEASE --auto
+            sentry-cli releases files $SENTRY_RELEASE upload-sourcemaps path-to-sourcemaps-if-applicable
+            sentry-cli releases finalize $SENTRY_RELEASE
+            sentry-cli releases deploys $SENTRY_RELEASE new -e $SENTRY_ENVIRONMENT
 
 workflows:
   version: 2
