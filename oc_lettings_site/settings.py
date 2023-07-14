@@ -11,7 +11,7 @@ load_dotenv()
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('SECRET_KEY')
-SENTRY_DSN = os.environ.get("SENTRY_DSN")
+SENTRY_DSN = os.environ.get('SENTRY_DSN')
 
 IS_HEROKU_APP = "DYNO" in os.environ and "CI" not in os.environ
 
