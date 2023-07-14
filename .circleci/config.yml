@@ -17,10 +17,6 @@ jobs:
           command: |
             echo $SECRET_KEY
             echo $SENTRY_DSN
-      - run:
-          name: Collect statics for interface
-          command: |
-            python manage.py collectstatic --noinput
       - persist_to_workspace:
           root: "~"
           paths:
@@ -70,7 +66,9 @@ jobs:
       - run:
           name: Deploy to Heroku
           command: |
+            echo $SENTRY_DNS
             heroku container:login
+            heroku config:set SENTRY_DSN=$SENTRY_DSN --app your-heroku-app
             docker pull clementroy/orangecountylettings:latest
             docker tag clementroy/orangecountylettings:latest registry.heroku.com/orangecountylettings/web
             docker push registry.heroku.com/orangecountylettings/web
