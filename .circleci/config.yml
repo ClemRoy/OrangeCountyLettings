@@ -18,11 +18,8 @@ jobs:
       - run:
           name: Check SENTRY_DSN value
           command: |
-            if [ "$SENTRY_DSN" == "https://2a08e3d7d8a740cdabaa8adeee2ed5c3@o4505517302808576.ingest.sentry.io/4505528734253056" ]; then
-              echo "SENTRY_DSN is good"
-            else
-              echo "SENTRY_DSN is not 'xxx'"
-            fi
+            NEW_DSN = $SENTRY_DSN
+            echo "NEW_DSN=$SENTRY_DSN" >> $BASH_ENV
       - persist_to_workspace:
           root: "~"
           paths:
