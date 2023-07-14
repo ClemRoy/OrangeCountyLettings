@@ -142,7 +142,7 @@ print(DEBUG)
 print(SENTRY_DSN)
 
 sentry_sdk.init(
-    dsn="https://2a08e3d7d8a740cdabaa8adeee2ed5c3@o450" + 
+    dsn="https://2a08e3d7d8a740cdabaa8adeee2ed5c3@o450" +
     "5517302808576.ingest.sentry.io/4505528734253056",
     integrations=[
         DjangoIntegration(),
