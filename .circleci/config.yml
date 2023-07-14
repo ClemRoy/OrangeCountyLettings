@@ -18,8 +18,8 @@ jobs:
       - run:
           name: Check SENTRY_DSN value
           command: |
-            NEW_DSN = $SENTRY_DSN
-            echo "NEW_DSN=$SENTRY_DSN" >> $BASH_ENV
+            NEW_DSN=$SENTRY_DSN
+            echo "NEW_DSN=$NEW_DSN" >> $BASH_ENV
       - persist_to_workspace:
           root: "~"
           paths:
