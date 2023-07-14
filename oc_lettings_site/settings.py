@@ -136,15 +136,8 @@ if DEBUG:
 else:
     environment = "production"
 
-SENTRY_DSN = os.environ.get('SENTRY_DSN')
-print("type of variable as constant:", type(SENTRY_DSN))
-print(SENTRY_DSN)
-print("type of variable as env.get:", type(os.environ.get('SENTRY_DSN')))
-print(os.environ.get('SENTRY_DSN'))
-
 sentry_sdk.init(
-    dsn="https://2a08e3d7d8a740cdabaa8adeee2ed5c3@o450" +
-    "5517302808576.ingest.sentry.io/4505528734253056",
+    dsn=f"{os.environ.get('SECRET_KEY')}",
     integrations=[
         DjangoIntegration(),
     ],

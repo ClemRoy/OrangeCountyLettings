@@ -15,10 +15,6 @@ jobs:
       - checkout
       - python/install-packages:
         requirements-file: requirements.txt
-      - run:
-          name: Check SENTRY_DSN value
-          command: |
-            echo "DSN: $SENTRY_DSN"
       - persist_to_workspace:
           root: "~"
           paths:
@@ -27,8 +23,6 @@ jobs:
   test:
     docker:
       - image: cimg/python:3.10.2
-    environment:
-      SENTRY_DSN: $SENTRY_DSN
     steps:
       - attach_workspace:
           at: "~"
@@ -54,8 +48,8 @@ jobs:
   deploy_on_heroku:
     executor: heroku/default
     environment:
-      SENTRY_ORG: roy-jc
-      SENTRY_PROJECT: orangecountylettings
+      SENTRY_ORG: $SENTRY_ORG
+      SENTRY_PROJECT: $SENTRY_PROJECT
       SENTRY_ENVIRONMENT: production
     steps:
       - attach_workspace:
