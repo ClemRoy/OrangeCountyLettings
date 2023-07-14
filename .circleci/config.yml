@@ -44,6 +44,8 @@ jobs:
 
   deploy_on_heroku:
     executor: heroku/default
+    environment:
+      SENTRY_ENVIRONMENT: production
     steps:
       - attach_workspace:
           at: "~"
@@ -67,7 +69,6 @@ jobs:
           command: |
             echo $SENTRY_ORG
             echo $SENTRY_PROJECT
-            SENTRY_ENVIRONMENT= "production"
             echo $SENTRY_ENVIRONMENT
             curl -sL https://sentry.io/get-cli/ | bash
             export SENTRY_RELEASE=$(sentry-cli releases propose-version)
