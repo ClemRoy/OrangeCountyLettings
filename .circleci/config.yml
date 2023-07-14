@@ -43,7 +43,7 @@ jobs:
             echo $DOCKERHUB_USERNAME
             docker build -t clementroy/orangecountylettings:$HASH .
             echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
-            docker push clementroy/orangecountylettings:latest
+            docker push clementroy/orangecountylettings:$HASH
 
 
   deploy_on_heroku:
