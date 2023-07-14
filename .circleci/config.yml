@@ -29,7 +29,7 @@ jobs:
   build_and_push_docker:
     executor: docker/docker
     environment:
-      HASH: git rev-parse HEAD
+      HASH: $(git rev-parse HEAD)
     steps:
       - attach_workspace:
           at: "~"
