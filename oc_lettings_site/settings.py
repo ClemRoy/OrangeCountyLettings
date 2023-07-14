@@ -136,7 +136,8 @@ if DEBUG:
 else:
     environment = "production"
 
-SENTRY_DSN = 
+SENTRY_DSN = os.environ.get('SENTRY_DSN')
+print("environment dsn:",SENTRY_DSN)
 if os.environ.get('SENTRY_DSN') is None:
     print("doesn't get DSN")
 else:
