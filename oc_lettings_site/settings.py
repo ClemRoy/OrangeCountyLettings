@@ -126,8 +126,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
-
-
 if DEBUG:
     if os.environ.get('DJANGO_SETTINGS_MODULE') == '<project_name>.settings':
         environment = "Django_development"
