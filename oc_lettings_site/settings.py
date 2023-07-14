@@ -129,7 +129,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 if DEBUG:
-    if os.environ.get('DJANGO_SETTINGS_MODULE') == '<project_name>.settings':
+    if os.environ.get('DJANGO_SETTINGS_MODULE') == 'oc_lettings_site.settings':
         environment = "Django_development"
         SENTRY_RELEASE = "django_local"
     else:
