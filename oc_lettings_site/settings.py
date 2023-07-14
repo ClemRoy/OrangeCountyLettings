@@ -138,11 +138,12 @@ else:
 
 print(environment)
 print(DEBUG)
-if os.environ.get('SENTRY_DSN') == None:
+if os.environ.get('SENTRY_DSN') is None:
     print("doesn't get DSN")
 
 sentry_sdk.init(
-    dsn= 'https://2a08e3d7d8a740cdabaa8adeee2ed5c3@o4505517302808576.ingest.sentry.io/4505528734253056',
+    dsn= """https://2a08e3d7d8a740cdabaa8adeee2ed5c3@o450
+    5517302808576.ingest.sentry.io/4505528734253056""",
     integrations=[
         DjangoIntegration(),
     ],
