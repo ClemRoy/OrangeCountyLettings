@@ -23,6 +23,8 @@ jobs:
   test:
     docker:
       - image: cimg/python:3.10.2
+    environment:
+      SENTRY_DSN: $SENTRY_DSN
     steps:
       - attach_workspace:
           at: "~"
@@ -64,7 +66,6 @@ jobs:
       - run:
           name: Deploy to Heroku
           command: |
-            echo $SENTRY_DNS
             heroku container:login
             docker pull clementroy/orangecountylettings:latest
             docker tag clementroy/orangecountylettings:latest registry.heroku.com/orangecountylettings/web
