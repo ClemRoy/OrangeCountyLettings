@@ -68,8 +68,8 @@ jobs:
           name: Deploy to Heroku
           command: |
             heroku container:login
-            docker pull clementroy/orangecountylettings:"$HASH"
-            docker tag clementroy/orangecountylettings:"$HASH" registry.heroku.com/orangecountylettings/web
+            docker pull clementroy/orangecountylettings:'$HASH'
+            docker tag clementroy/orangecountylettings:'$HASH registry.heroku.com/orangecountylettings/web
             docker push registry.heroku.com/orangecountylettings/web
             heroku container:release web -a orangecountylettings
       - run:
