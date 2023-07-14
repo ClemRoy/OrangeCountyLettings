@@ -137,7 +137,8 @@ else:
     environment = "production"
 
 SENTRY_DSN = os.environ.get('SENTRY_DSN')
-print("environment dsn:", SENTRY_DSN)
+print("type of variable as constant:", type(SENTRY_DSN))
+print("type of variable as env.get:", type(os.environ.get('SENTRY_DSN')))
 if os.environ.get('SENTRY_DSN') is None:
     print("doesn't get DSN")
 else:
