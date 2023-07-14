@@ -138,6 +138,13 @@ else:
 
 if os.environ.get('SENTRY_DSN') is None:
     print("doesn't get DSN")
+else:
+    first_half = "https://2a08e3d7d8a740cdabaa8adeee2ed5c3@o450"
+    second_half = "5517302808576.ingest.sentry.io/4505528734253056"
+    dsn = first_half + second_half
+    print(dsn)
+    if os.environ.get('SENTRY_DSN') == dsn:
+        print("everything should be OK")
 
 sentry_sdk.init(
     dsn="https://2a08e3d7d8a740cdabaa8adeee2ed5c3@o450" +
