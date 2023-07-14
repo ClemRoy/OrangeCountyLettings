@@ -33,12 +33,12 @@ jobs:
           at: "~"
       - setup_remote_docker:
           version: 20.10.7
-    - run:
-        name: Get commit hash
-        command: |
-          HASH=$(git rev-parse HEAD)
-          echo "Commit Hash: $HASH"
-          echo "HASH=$HASH" >> $BASH_ENV
+      - run:
+          name: Get commit hash
+          command: |
+            HASH=$(git rev-parse HEAD)
+            echo "Commit Hash: $HASH"
+            echo "HASH=$HASH" >> $BASH_ENV
       - run:
           name: Build and push docker image
           command: |
