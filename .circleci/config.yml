@@ -29,7 +29,7 @@ jobs:
   build_and_push_docker:
     executor: docker/docker
     environment: 
-      COMMIT_HASH: $(git rev-parse HEAD)
+      COMMIT_HASH: $(git log -1 --format=%h)
     steps:
       - attach_workspace:
           at: "~"
@@ -38,9 +38,9 @@ jobs:
       - run:
           name: Build and push docker image
           command: |
+            echo $COMMIT_HASH
             echo $DOCKERHUB_USERNAME
             docker build -t clementroy/orangecountylettings:latest .
-            docker tag clementroy/orangecountylettings:latest clementroy/orangecountylettings:${COMMIT_HASH}
             echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
             docker push clementroy/orangecountylettings:latest
 
