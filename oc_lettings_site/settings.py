@@ -136,6 +136,7 @@ if DEBUG:
 else:
     environment = "production"
 
+SENTRY_DSN = 
 if os.environ.get('SENTRY_DSN') is None:
     print("doesn't get DSN")
 else:
@@ -145,6 +146,8 @@ else:
     print(dsn)
     if os.environ.get('SENTRY_DSN') == dsn:
         print("everything should be OK")
+    else:
+        print("variable doesn't work")
 
 sentry_sdk.init(
     dsn="https://2a08e3d7d8a740cdabaa8adeee2ed5c3@o450" +
