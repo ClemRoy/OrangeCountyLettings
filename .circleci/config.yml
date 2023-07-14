@@ -44,7 +44,6 @@ jobs:
       - run:
           name: Build and push docker image
           command: |
-            echo $SENTRY_DSN
             echo $DOCKERHUB_USERNAME
             docker build -t clementroy/orangecountylettings:latest .
             echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
@@ -65,6 +64,7 @@ jobs:
       - run:
           name: Deploy to Heroku
           command: |
+            echo $SENTRY_DSN
             heroku container:login
             docker pull clementroy/orangecountylettings:latest
             docker tag clementroy/orangecountylettings:latest registry.heroku.com/orangecountylettings/web
