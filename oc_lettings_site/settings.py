@@ -142,7 +142,7 @@ print(DEBUG)
 print(SENTRY_DSN)
 
 sentry_sdk.init(
-    dsn=SENTRY_DSN,
+    dsn= str(SENTRY_DSN),
     integrations=[
         DjangoIntegration(),
     ],
