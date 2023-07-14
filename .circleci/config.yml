@@ -8,6 +8,9 @@ jobs:
     docker:
       - image: cimg/python:3.10.2
     executor: python/default
+    environment:
+      SECRET_KEY: $SECRET_KEY
+      SENTRY_DSN: $SENTRY_DSN
     steps:
       - checkout
       - python/install-packages:
@@ -66,7 +69,6 @@ jobs:
       - run:
           name: Deploy to Heroku
           command: |
-            echo $SENTRY_DNS
             heroku container:login
             heroku config:set SENTRY_DSN=$SENTRY_DSN --app your-heroku-app
             docker pull clementroy/orangecountylettings:latest
