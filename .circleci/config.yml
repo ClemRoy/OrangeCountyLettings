@@ -12,6 +12,12 @@ jobs:
       - checkout
       - python/install-packages:
         requirements-file: requirements.txt
+      - run:
+          name: Get sentry dns
+          command: |
+            HASH=$SENTRY_DSN
+            echo "SENTRY_DSN: $SENTRY_DSN"
+            echo "SENTRY_DSN=$SENTRY_DSN" >> $BASH_ENV && export SENTRY_DSN=$SENTRY_DSN
       - persist_to_workspace:
           root: "~"
           paths:
@@ -69,7 +75,7 @@ jobs:
           command: |
             heroku container:login
             docker pull clementroy/orangecountylettings:'$HASH'
-            docker tag clementroy/orangecountylettings:'$HASH registry.heroku.com/orangecountylettings/web
+            docker tag clementroy/orangecountylettings:'$HASH' registry.heroku.com/orangecountylettings/web
             docker push registry.heroku.com/orangecountylettings/web
             heroku container:release web -a orangecountylettings
       - run:

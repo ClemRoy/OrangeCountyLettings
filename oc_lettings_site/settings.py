@@ -11,7 +11,7 @@ load_dotenv()
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('SECRET_KEY')
-
+SENTRY_DSN = os.environ.get('SENTRY_DSN')
 IS_HEROKU_APP = "DYNO" in os.environ and "CI" not in os.environ
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -137,8 +137,7 @@ else:
     environment = "production"
 
 sentry_sdk.init(
-    dsn="https://2a08e3d7d8a740cdabaa8adeee2ed5c3@o450" +
-    "5517302808576.ingest.sentry.io/4505528734253056",
+    dsn=SENTRY_DSN,
     integrations=[
         DjangoIntegration(),
     ],
