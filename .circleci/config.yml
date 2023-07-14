@@ -17,6 +17,10 @@ jobs:
           command: |
             echo $SECRET_KEY
       - run:
+        name: Set Sentry DSN
+        command: |
+          echo $SENTRY_DSN
+      - run:
           name: Collect statics for interface
           command: |
             python manage.py collectstatic --noinput
@@ -36,8 +40,6 @@ jobs:
 
   build_and_push_docker:
     executor: docker/docker
-    environment:
-      SENTRY_DSN: $SENTRY_DSN
     steps:
       - attach_workspace:
           at: "~"
