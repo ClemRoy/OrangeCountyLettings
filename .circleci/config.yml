@@ -8,9 +8,6 @@ jobs:
     docker:
       - image: cimg/python:3.10.2
     executor: python/default
-    environment:
-      SECRET_KEY: $SECRET_KEY
-      SENTRY_DSN: $SENTRY_DSN
     steps:
       - checkout
       - python/install-packages:
@@ -47,10 +44,6 @@ jobs:
 
   deploy_on_heroku:
     executor: heroku/default
-    environment:
-      SENTRY_ORG: $SENTRY_ORG
-      SENTRY_PROJECT: $SENTRY_PROJECT
-      SENTRY_ENVIRONMENT: production
     steps:
       - attach_workspace:
           at: "~"
@@ -72,6 +65,10 @@ jobs:
       - run:
           name: Create release and notify Sentry of deploy
           command: |
+            echo $SENTRY_ORG
+            echo $SENTRY_PROJECT
+            SENTRY_ENVIRONMENT: production
+            echo $SENTRY_ENVIRONMENT
             curl -sL https://sentry.io/get-cli/ | bash
             export SENTRY_RELEASE=$(sentry-cli releases propose-version)
             sentry-cli releases new -p $SENTRY_PROJECT $SENTRY_RELEASE
