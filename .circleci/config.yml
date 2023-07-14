@@ -8,18 +8,10 @@ jobs:
     docker:
       - image: cimg/python:3.10.2
     executor: python/default
-    environment:
-      SECRET_KEY: $SECRET_KEY
-      SENTRY_DSN: $SENTRY_DSN
     steps:
       - checkout
       - python/install-packages:
         requirements-file: requirements.txt
-      - run:
-          name: Set Secret Key
-          command: |
-            echo $SECRET_KEY
-            echo $SENTRY_DSN
       - persist_to_workspace:
           root: "~"
           paths:
