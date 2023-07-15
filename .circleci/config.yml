@@ -81,7 +81,7 @@ jobs:
           command: |
             echo $HASH
             echo "Commit Hash: $HASH"
-            echo "addess: clementroy/orangecountylettings:$HASH"
+            echo "addess: clementroy/orangecountylettings:$HASH
             heroku container:login
             docker pull clementroy/orangecountylettings:$HASH
             docker tag clementroy/orangecountylettings:$HASH registry.heroku.com/orangecountylettings/web
