@@ -60,6 +60,7 @@ jobs:
     executor: heroku/default
     environment:
       SENTRY_ENVIRONMENT: production
+      HASH: $HASH
     steps:
       - attach_workspace:
           at: "~"
