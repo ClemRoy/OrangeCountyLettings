@@ -76,59 +76,59 @@ Utilisation de PowerShell, comme ci-dessus sauf :
 - Pour activer l'environnement virtuel, `.\venv\Scripts\Activate.ps1` 
 - Remplacer `which <my-command>` par `(Get-Command <my-command>).Path`
 
-### Déploiement
+## Déploiement
 
-Prérequis pour le déploiement:
-- Un compte Github
-- Un compte Circle/CI
-- Un compte Heroku
-- Un compte Sentry
+### Prérequis:
 
- Le déploiement s'effectue via un pipeline CI/CD composé de plusieurs étapes.Le repository Git est lié a une organisation sur Circle/CI.
- Lorsqu'un changement est effectué sur la branche master du repository Git le pipeline est activé automatiquement, si le code passe les tests définis
- dans le workflow présent dans le fichier config.yml dans le dossier .circleci, une nouvelle image docker est crée et poussée sur DockerHub.
- Cette image est ensuite déployée sur une application Heroku a partir de laquelle elle est accessible.
- Si vous faites parti de l'organisation Circle/CI, vous pouvez redéployer l'application soit en relançant le dernier workflow réussi ou en créant un
- nouveau commit sur la branche master (les commit effectué sur les autres branches ne seront pas déployés).
+1. Un compte GitHub
+2. Un compte CircleCI
+3. Un compte Heroku
+4. Un compte Sentry
 
-  Si vous n'êtes pas membre de l'organisation vous pourez redéployer l'application en suivant la procédure décrite ci-dessous (a condition d'avoir tout 
-  les éléments mentionnés dans la liste des prérequis):
-- Créer un nouveau repository depuis votre compte GitHub en clonant le code présent ici:
-```
-https://github.com/ClemRoy/OrangeCountyLettings.git
-```
-- Connectez vous a votre compte Circle/CI et liez le au repository crée sur votre compte Github.
-- Une fois cette étape effectuée, rendez vous dans l'onglet "project settings" correspondant au projet en question sur l'interface de Circle/CI et accedez 
-a la page "Environment variables" a l'interieur de celui ci pour y ajouter la liste de variable suivante:
-  - DOCKERHUB_PASSWORD: le mot de passe de votre compte Dockerhub
-  - DOCKERHUB_USERNAME: votre nom d'utilisateur Dockerhub
-  - HEROKU_API_KEY: la clé API lié a votre compte Heroku, trouvable dans votre "account settings" sur Heroku
-  - HEROKU_EMAIL: l'email lié a votre compte heroku
-  - SECRET_KEY: la clé secrete du projet django, si vous ne l'avez plus vous pouvez un régenerer une nouvelle a l'aide du guide ci dessous:
-  ```
-  https://codinggear.blog/django-generate-secret-key/#step-1-access-the-python-interactive-shell
-  ```
-  - SENTRY_ORG: le nom de votre organisation sur Sentry
-  - SENTRY_PROJECT: le nom de votre project sur Sentry
-  Vou pouvez trouver ces dernières en vous connectant a votre compte sentry et en accédant au projet que vous avez créer pour acceuillir les logs, elle seront présente dans l'url du site sous cette forme:
-  ```
-  https://SENTRY_ORG.sentry.io/projects/SENTRY_PROJECTs/?project=XXXXXX
-  ```
-  - SENTRY_AUTH_TOKEN: vous pouvez la créer en allant dans l'onglet settings de votre projet Sentry sous le nom de Security Token "Auth Tokens"
+### Pipeline CI/CD
 
-  Toutes ces variables d'environment sont indispensable pour pouvoir déployer le site via circle/CI.Veuillez noter que si l'une de ces variable comprend un carractère "$"
-  vous devrez échapper le caractère un question en plaçant un "\" avant celui ci sinon la variable ne fonctionnerat pas correctement.
+  Le déploiement de l'application se fait à travers un pipeline CI/CD composé de plusieurs étapes. Le repository Git est lié à une organisation sur CircleCI. Lorsqu'un changement est effectué sur la branche master, le pipeline est automatiquement déclenché. Si le code réussit les tests définis dans le fichier config.yml du dossier .circleci, une nouvelle image Docker est créée et poussée sur DockerHub. Cette image est ensuite déployée sur une application Heroku.
 
-  Une fois ces informations remplies,rendez vous dans le fichier config.yml et remplacez toutes les instances de: 
+### Procédure de déploiement
+
+  Si vous faites partie de l'organisation CircleCI, vous pouvez redéployer l'application en relançant le dernier workflow réussi ou en créant un nouveau commit sur la branche master. Notez que seuls les commits effectués sur la branche master seront déployés.
+
+  Si vous n'êtes pas membre de l'organisation, suivez les étapes ci-dessous pour déployer l'application :
+
+  1. Créez un nouveau repository depuis votre compte GitHub en clonant le code présent ici :
   ```
-  clementroy/orangecountylettings
+  https://github.com/ClemRoy/OrangeCountyLettings.git
   ```
+  2. Connectez-vous à votre compte CircleCI et liez-le au repository créé sur votre compte GitHub.
+
+  3. Accédez à l'onglet "Project Settings" correspondant au projet sur l'interface de CircleCI, puis rendez-vous dans la section "Environment Variables". Ajoutez les variables d'environnement suivantes :
+
+  - DOCKERHUB_PASSWORD : le mot de passe de votre compte DockerHub
+  - DOCKERHUB_USERNAME : votre nom d'utilisateur DockerHub
+  - HEROKU_API_KEY : la clé API associée à votre compte Heroku (trouvable dans les paramètres de votre compte Heroku)
+  - HEROKU_EMAIL : l'adresse e-mail associée à votre compte Heroku
+  - SECRET_KEY : la clé secrète du projet Django. Si vous ne l'avez plus, vous pouvez en générer une nouvelle à l'aide du guide suivant :
+    ```
+    https://codinggear.blog/django-generate-secret-key/#step-1-access-the-python-interactive-shell
+    ```
+  - SENTRY_ORG : le nom de votre organisation sur Sentry
+  -  SENTRY_PROJECT : le nom de votre projet sur Sentry. Vous pouvez trouver ces informations en vous connectant à votre compte Sentry et en accédant au projet que vous avez créé pour accueillir les logs. Les informations seront présentes dans l'URL du site sous cette forme :
+    ```
+    https://SENTRY_ORG.sentry.io/projects/SENTRY_PROJECTs/?project=XXXXXX
+    ```
+  - SENTRY_AUTH_TOKEN : vous pouvez la créer en allant dans l'onglet "Settings" de votre projet Sentry sous le nom de "Security Token" -> "Auth Tokens"
+
+  Il est important de noter que si l'une de ces variables contient un caractère $, vous devez échapper le caractère en plaçant un \ devant, sinon la variable ne fonctionnera pas correctement.
+
+  4. Une fois ces informations renseignées, rendez-vous dans le fichier config.yml et remplacez toutes les occurrences de :
+    ```
+    clementroy/orangecountylettings
+    ```
   par 
-  ```
-  votre-nom-d'utilisateur-docker/orangecountylettings
-  ```
+    ```
+    votre-nom-d'utilisateur-docker/orangecountylettings
+    ```
 
-  Enfin, rendez vous dans settings.py dans le dossier oc_lettings_site et remplacez la variable dsn a la ligne 136 par celle fournies dans l'onglet Client Keys(DSN)
-  dans les settings de votre projet sur Sentry.
+  5. Enfin, ouvrez le fichier settings.py dans le dossier oc_lettings_site et remplacez la valeur de la variable DSN à la ligne 136 par celle fournie dans l'onglet "Client Keys (DSN)" des paramètres de votre projet sur Sentry.
 
-  Une fois toutes ces étapes accomplies,vous devriez pouvoir déployer l'application en effectuant un commit sur la branche master.
+  Une fois ces étapes terminées, vous pouvez déployer l'application en effectuant un commit sur la branche master. Seuls les commits sur cette branche déclencheront le déploiement.
