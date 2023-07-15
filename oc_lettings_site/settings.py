@@ -132,6 +132,8 @@ if DEBUG:
 else:
     environment = "production"
 
+print(SENTRY_DSN)
+
 sentry_sdk.init(
     dsn=SENTRY_DSN,
     integrations=[
