@@ -12,12 +12,6 @@ jobs:
       - checkout
       - python/install-packages:
         requirements-file: requirements.txt
-      - run:
-          name: Get sentry dns
-          command: |
-            SENTRY_DSN=$SENTRY_DSN
-            echo "SENTRY_DSN: $SENTRY_DSN"
-            echo "SENTRY_DSN=$SENTRY_DSN" >> $BASH_ENV && export SENTRY_DSN=$SENTRY_DSN
       - persist_to_workspace:
           root: "~"
           paths:

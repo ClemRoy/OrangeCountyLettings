@@ -132,10 +132,9 @@ if DEBUG:
 else:
     environment = "production"
 
-print(SENTRY_DSN)
-
 sentry_sdk.init(
-    dsn=SENTRY_DSN,
+    dsn="""https://17fd7c9ba96b41ed8145b791e649d4bc@
+    o4505517302808576.ingest.sentry.io/4505530604453888""",
     integrations=[
         DjangoIntegration(),
     ],
