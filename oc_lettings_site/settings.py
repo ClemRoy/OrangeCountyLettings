@@ -133,7 +133,8 @@ else:
     environment = "production"
 
 sentry_sdk.init(
-    dsn="""https://294d3daf93734ee7bb2192b0f5e68138@o4505517302808576.ingest.sentry.io/4505530697187328""",
+    dsn="""https://294d3daf93734ee7bb2192b0f5e68138@o45
+    05517302808576.ingest.sentry.io/4505530697187328""",
     integrations=[
         DjangoIntegration(),
     ],
