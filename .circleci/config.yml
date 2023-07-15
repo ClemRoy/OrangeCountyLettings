@@ -60,7 +60,6 @@ jobs:
     executor: heroku/default
     environment:
       SENTRY_ENVIRONMENT: production
-      HASH: $HASH
     steps:
       - attach_workspace:
           at: "~"
@@ -72,11 +71,17 @@ jobs:
           command: |
             heroku apps:info -a orangecountylettings || heroku apps:create orangecountylettings --region eu
       - run:
+          name: Get commit hash
+          command: |
+            HASH=$(git rev-parse HEAD)
+            echo "Commit Hash: $HASH"
+            echo "HASH=$HASH" >> $BASH_ENV && export HASH=$HASH
+      - run:
           name: Deploy to Heroku
           command: |
             echo $HASH
             echo "Commit Hash: $HASH"
-            echo "addess: "
+            echo "addess: clementroy/orangecountylettings:$HASH"
             heroku container:login
             docker pull clementroy/orangecountylettings:$HASH
             docker tag clementroy/orangecountylettings:$HASH registry.heroku.com/orangecountylettings/web
